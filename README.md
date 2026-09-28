@@ -31,3 +31,24 @@ This means only the file owner can read and write the file.
 - Ubuntu
 - WSL 2
 - Linux
+
+## User and Permission Lab
+
+I created a second Linux user called `labuser` to test file permissions.
+
+### Experiment
+
+With `notes.txt` set to `600`, `labuser` could not read the file.
+
+I temporarily changed the file permission to `644`, but `labuser` was still denied because `/home/billi` did not allow other users to traverse it.
+
+After temporarily adding execute permission to `/home/billi`, `labuser` could read the file because `notes.txt` was `644`.
+
+The permissions were then restored to:
+
+- `/home/billi`: `750`
+- `notes.txt`: `600`
+
+### Security Lesson
+
+File permissions and directory permissions work together. A user needs appropriate directory permissions to reach a file before the file's own permissions can be evaluated.
