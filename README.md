@@ -52,3 +52,26 @@ The permissions were then restored to:
 ### Security Lesson
 
 File permissions and directory permissions work together. A user needs appropriate directory permissions to reach a file before the file's own permissions can be evaluated.
+
+## Authentication Log Investigation
+
+I used `/var/log/auth.log` to investigate sudo activity.
+
+I filtered the log with:
+
+`sudo grep 'USER=labuser' /var/log/auth.log`
+
+The log showed that user `billi` used `sudo` to execute `cat` as `labuser`.
+
+The command was recorded even though `labuser` received `Permission denied` when trying to read `notes.txt`.
+
+### Security Lesson
+
+Authentication logs can help investigate user activity by showing:
+
+- Who performed an action
+- Which user the command ran as
+- Which command was executed
+- When the activity occurred
+
+Logs are important for investigating suspicious or unauthorized activity.
